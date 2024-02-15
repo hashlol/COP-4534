@@ -115,4 +115,19 @@ public class BinarySearchTree
     {
         return numberOfElements;
     }
+    public void maxSumPathFromRootToLeaves(){
+        int sum = 0;
+        while(root != null){
+            if(root.getLeftChild().getInfo() > root.getRightChild().getInfo()){
+                sum += root.getLeftChild().getInfo();
+                root = root.getLeftChild();
+            }else if(root.getRightChild().getInfo() > root.getLeftChild().getInfo()){
+                sum += root.getRightChild().getInfo();
+                root = root.getRightChild();
+            }else{
+                break;
+            }
+        }
+    }
+
 }
