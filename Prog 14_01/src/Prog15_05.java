@@ -8,7 +8,7 @@ public class Prog15_05 {
     public static void main(String[] args) {
         new Prog15_05();
     }
-    // Deterministic
+
     public Prog15_05() {
         BigInteger n;
         BigInteger FIRST = new BigInteger("10000000000000819");
