@@ -26,8 +26,8 @@ public class tester {
 
         System.out.println("====EDGES REMOVED====");
 
-        g.removeEdge(0,1);
-        g.removeEdge(2,3);
+     //   g.removeEdge(0,1);
+    //    g.removeEdge(2,3);
 
         System.out.print("    ");
         for(int i = 0; i<5; i++){
@@ -40,6 +40,17 @@ public class tester {
         }
         System.out.println();
         System.out.println(g.toString());
+
+
+        int[] adj = {1,2,3,4};
+
+        for(int a: adj){
+            System.out.print(a+": ");
+            for(int b: g.findAdjacencyVertices(a)){
+                System.out.print(b + " ");
+            }
+            System.out.println();
+        }
 
     }
 }
