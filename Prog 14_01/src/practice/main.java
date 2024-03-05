@@ -101,6 +101,7 @@ class Graph<T> {
 }
 
 // Driver Code
+
 public class main {
 
     public static void main(String args[])
@@ -136,5 +137,6 @@ public class main {
         // Tells whether vertex is present or not
         g.hasVertex(5);
     }
-}
+
+ }
 

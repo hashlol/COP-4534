@@ -1,4 +1,4 @@
-
+package Prog18_01;
 import java.util.Arrays;
 
 /**
@@ -65,6 +65,8 @@ public class Graph implements GraphInterface
         
         for (int i=0; i<verticesNumber; i++)
         {
+            s += i;
+            s+=" | ";
             for (int j=0; j<verticesNumber; j++)
             {
                 s += matrix[i][j] + " ";
