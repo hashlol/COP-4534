@@ -29,5 +29,20 @@ public class Prog17_01 {
         }
         return fib[n];
     }
+
+    public long fiboacci_constant_memory(int n){
+        if (n<=1) return n;
+
+        long f0 = 0;
+        long f1 = 1;
+        long f2 = f1+f0;
+
+        for(int i =3; i<=n; i++){
+            f0 = f1;
+            f1=f2;
+           //
+        }
+        return 10;
+    }
 }
 
