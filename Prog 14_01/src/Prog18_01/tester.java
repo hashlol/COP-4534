@@ -52,5 +52,9 @@ public class tester {
             System.out.println();
         }
 
+        // Testing BFS with Graph
+        System.out.println();
+        System.out.println("============");
+        g.BFT(0);
     }
 }

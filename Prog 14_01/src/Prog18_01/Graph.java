@@ -1,5 +1,8 @@
 package Prog18_01;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Arrays;
+import java.util.Scanner;
 
 /**
  * Implements a Graph. Uses an adjacency matrix to represent the graph.
@@ -21,6 +24,42 @@ public class Graph implements GraphInterface
     {
         verticesNumber = n;
         matrix = new int[verticesNumber][verticesNumber];
+    }
+    /**
+     * Instantiates a graph and initializes it with info from a text file.
+     *
+     * @param filename text file with graph info
+     */
+    public Graph(String filename)
+    {
+        File input = new File(filename);
+
+        Scanner in = null;
+        try
+        {
+            in = new Scanner(input);
+        }
+        catch(FileNotFoundException e)
+        {
+            System.out.println("File not found!");
+            System.exit(0);
+        }
+
+        while (in.hasNextLine())
+        {
+            verticesNumber = in.nextInt();
+            matrix = new int[verticesNumber][verticesNumber];
+
+            for(int i=0; i<verticesNumber; i++)
+            {
+                for(int j=0; j<verticesNumber; j++)
+                {
+                    matrix[i][j] = in.nextInt();
+                }
+            }
+        }
+
+        in.close();
     }
     
     public void addEdge(int v, int w)
@@ -75,5 +114,34 @@ public class Graph implements GraphInterface
         }
         
         return s;
+    }
+
+    public void BFT(int v){
+        boolean[] visited = new boolean[verticesNumber];
+
+        for(int i = 0; i< verticesNumber; i++){
+            visited[i] = false;
+        }
+        Queue vertexQueue = new Queue();
+
+        vertexQueue.enqueue(v);
+
+        visited[v] = true;
+
+        while(!vertexQueue.isEmpty()){
+            int w = vertexQueue.getFront();
+            System.out.print(w+" ");
+            vertexQueue.dequeue();
+
+            int[] adj = findAdjacencyVertices(w);
+
+            for(int u: adj){
+                if(!visited[u]){
+                    vertexQueue.enqueue(u);
+                    visited[u] = true;
+                }
+            }
+        }
+
     }
 }

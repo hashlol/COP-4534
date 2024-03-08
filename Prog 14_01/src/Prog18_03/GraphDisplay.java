@@ -49,13 +49,17 @@ public class GraphDisplay extends JPanel
         g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 24));
         g.drawString("3", leftX+gridWidth+labelX, topY+labelY+topY);
 
-        //draw edge (1, 2)
+        //draw edge (1 to 2)
         g.setColor(Color.BLACK);
         g.drawLine(leftX+width, topY+height/2, leftX+gridWidth, topY+height/2);
 
-        g.drawLine(leftX+width, topY+height/2, leftX+gridWidth, (topY+height/2)+topY);
 
-        g.drawLine(leftX+width, topY+height/2, leftX+gridWidth, (topY+height/2)+topY);
+        // draw edge to (1 to 3)
+    //    g.drawLine(leftX+width, topY+height/2, leftX+gridWidth, (topY+height/2)+topY);
+
+
+        //improper way
+        g.drawLine(leftX+width/2, topY+height/2, leftX+gridWidth+width/2, topY+gridWidth+height/2);
 
     }
 }
