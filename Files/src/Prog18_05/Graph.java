@@ -102,6 +102,30 @@ public class Graph implements GraphInterface
         return Arrays.copyOf(vert, total);
     }
 
+    public void DFT(int v){
+        boolean[] visited = new boolean[verticesNumber];
+
+        for(int i = 0; i<verticesNumber; i++){
+            visited[i] = false;
+        }
+        recursiveDFT(v, visited);
+
+        for(int u = 0; u<verticesNumber; u++){
+            if(!visited[u]) recursiveDFT(u, visited);
+        }
+        System.out.println();
+    }
+
+    private void recursiveDFT(int v, boolean[] visited){
+        visited[v] = true;
+        System.out.print(v+" ");
+
+        int[] adj = findAdjacencyVertices(v);
+
+        for(int u: adj){
+            if(!visited[u]) recursiveDFT(u, visited);
+        }
+    }
     public String toString()
     {
         String s = "";

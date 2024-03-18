@@ -56,5 +56,15 @@ public class tester {
         System.out.println();
         System.out.println("============");
         g.BFT(0);
+
+        System.out.println("\n============");
+        Graph dft = new Graph("Prog18_05 - graph 01.txt");
+
+
+        dft.DFT(0);
+
+        int[] a = new int[11];
+        int[] b = new int[11];
+        dft.allShortestPath(a,b, 0 );
     }
 }
