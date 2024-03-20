@@ -1,6 +1,7 @@
 package Prog18_01;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -72,6 +73,10 @@ public class Graph implements GraphInterface
     {
         matrix[v][w] = 0;
         matrix[w][v] = 0;        
+    }
+
+    public int getVerticesNumber(){
+        return verticesNumber;
     }
     
     /**
@@ -169,6 +174,8 @@ public class Graph implements GraphInterface
         }
     }
 
+
+
     private int minDistance(boolean[] visited, int[] distance){
         int index = -1;
         int min = Integer.MAX_VALUE;
@@ -183,6 +190,7 @@ public class Graph implements GraphInterface
         return index;
     }
 
+    // DIJKSTRAS ALGORITHM
     public void allShortestPath(int[] p, int[] d, int v){
         boolean[] visited = new boolean[verticesNumber];
 
@@ -207,5 +215,82 @@ public class Graph implements GraphInterface
                 }
             }
         }
+    }
+
+    public int[] getPath(int s, int t, int p[]){
+        int[] shortestPath = new int[p.length];
+        int current = t;
+        int total = 0;
+        while(current != s){
+            shortestPath[total] = current;
+            current = p[current];
+            total++;
+        }
+        shortestPath[total++] = s;
+        shortestPath = Arrays.copyOf(shortestPath, total);
+
+        for(int i = 0; i< total/2; i++){
+            int temp = shortestPath[i];
+            shortestPath[i] = shortestPath[total-1-i];
+            shortestPath[total-1-i] = temp;
+        }
+        return shortestPath;
+    }
+
+    public int TSP_exhaustiveSearch(int[] shortestRoute){
+        for(int i = 0; i<verticesNumber; i++) {
+            shortestRoute[i] = i;
+      }
+        int[] a = new int[verticesNumber];
+
+        TSP_exhaustiveSearch(shortestRoute,a,0);
+      return totalDistance(shortestRoute);
+    }
+
+    int totalDistance(int[] a){
+        int n = verticesNumber;
+
+        int totalWeight = 0;
+        for(int i = 0; i<n; i++){
+            int weight = matrix[a[i]][a[(i+1)%n]];
+            totalWeight+=weight;
+        }
+        return totalWeight;
+    }
+
+    private void TSP_exhaustiveSearch(int[] shortestRotue, int[] a, int k){
+        if (k==a.length){
+            if(totalDistance(a) < totalDistance(shortestRotue)){
+                System.arraycopy(a, 0, shortestRotue, 0, verticesNumber);
+            }
+            System.out.println(totalDistance(a)+" ");
+            printArray(a);
+        }else{
+            ArrayList<Integer> Sk = constructCandidateSet(a,k);
+            for(int s: Sk){
+                a[k] = s;
+                TSP_exhaustiveSearch(shortestRotue, a,k+1);
+            }
+        }
+    }
+
+    private ArrayList<Integer> constructCandidateSet(int[] a, int k){
+        ArrayList<Integer> candidates = new ArrayList<>();
+        boolean[] b = new boolean[a.length];
+
+        for(int i = 0; i<k; i++){
+            b[a[i]] = true;
+        }
+        for(int i = 0; i<k; i++){
+            if(!b[i]) candidates.add(i);
+        }
+        return candidates;
+    }
+
+    private void printArray(int[] a){
+        for(int v: a){
+            System.out.print(v+" ");
+        }
+        System.out.println();
     }
 }

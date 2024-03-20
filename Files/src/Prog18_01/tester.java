@@ -18,7 +18,7 @@ public class tester {
         g.addEdge(0, 4);
         g.addEdge(1, 2);
         g.addEdge(1, 3);
-        g.addEdge(1, 4);
+        g.addEdge(1, 3);
         g.addEdge(2, 3);
         g.addEdge(3, 4);
 
@@ -63,8 +63,36 @@ public class tester {
 
         dft.DFT(0);
 
-        int[] a = new int[11];
-        int[] b = new int[11];
-        dft.allShortestPath(a,b, 0 );
+        System.out.println("======================");
+        System.out.println("Djikstra's algorithm test");
+        System.out.println("======================");
+
+        int vertices = dft.getVerticesNumber();
+        int[] prev = new int[vertices];
+        int[] dist = new int[vertices];
+        int v = 0;
+        dft.allShortestPath(prev,dist, v);
+
+        for(int node: dist){
+            System.out.print(node+" ");
+        }
+
+        int[] shortestPath = dft.getPath(v, 4, prev);
+        System.out.println();
+        for(int node: shortestPath){
+            System.out.print(node+" ");
+        }
+
+        System.out.println("\n======================");
+        System.out.println("Travelling salesman algorithm test");
+        System.out.println("======================");
+        Graph TSPSearch = new Graph();
+        for(int i = 0; i<10; i++){
+            //dft.addEdge(1+i, i+1);
+        }
+        int[] a = new int[20];
+
+
+        dft.TSP_exhaustiveSearch(a);
     }
 }
