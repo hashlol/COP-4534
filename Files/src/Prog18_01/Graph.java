@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -12,6 +13,7 @@ import java.util.Scanner;
  */
 public class Graph implements GraphInterface
 {
+    Random ran = new Random();
     private int verticesNumber;
     private int[][] matrix; //adjacency matrix
     
@@ -287,10 +289,44 @@ public class Graph implements GraphInterface
         return candidates;
     }
 
+
+    public int TSP_randomSampling(int[] shortestRoute){
+        int numberOfSamples = 10;
+        int bestDistance = Integer.MAX_VALUE;
+        for(int i = 0; i<numberOfSamples; i++){
+            int[] a = new int[verticesNumber];
+            randomPermutation(a);
+            int currentDistance = totalDistance(a);
+
+            if(currentDistance < bestDistance){
+                bestDistance = currentDistance;
+                System.out.println("Best distance:"+ bestDistance);
+                System.arraycopy(a,0,shortestRoute,0,verticesNumber);
+            }
+        }
+        return bestDistance;
+    }
+    // Prog 19_02
+    public void randomPermutation(int[] a){
+        for(int i = 0; i<a.length; i++) {
+            a[i] = i;
+        }
+        for(int i = a.length-1; i>0; i--){
+            int randomLoc = ran.nextInt(i+1);
+
+            if(randomLoc != i){
+                int temp = a[i];
+                a[i] = a[randomLoc];
+                a[randomLoc] = temp;
+        }
+        }
+    }
+
     private void printArray(int[] a){
         for(int v: a){
             System.out.print(v+" ");
         }
         System.out.println();
     }
+
 }

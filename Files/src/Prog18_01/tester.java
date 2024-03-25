@@ -1,5 +1,7 @@
 package Prog18_01;
 
+import java.util.Arrays;
+
 public class tester {
     public static void main(String[] args){
         Graph g = new Graph();
@@ -79,6 +81,7 @@ public class tester {
 
         int[] shortestPath = dft.getPath(v, 4, prev);
         System.out.println();
+        System.out.println("Shortest path:");
         for(int node: shortestPath){
             System.out.print(node+" ");
         }
@@ -86,13 +89,36 @@ public class tester {
         System.out.println("\n======================");
         System.out.println("Travelling salesman algorithm test");
         System.out.println("======================");
-        Graph TSPSearch = new Graph();
-        for(int i = 0; i<10; i++){
-            //dft.addEdge(1+i, i+1);
-        }
+        Graph TSP = new Graph(); // used for bottom one aswell
+
+        TSP.addEdge(0, 1);
+        TSP.addEdge(1,0);
+        TSP.addEdge(1,2);
+        TSP.addEdge(2, 2);
+        TSP.addEdge(2, 0);
+
         int[] a = new int[20];
+        System.out.println(dft.TSP_exhaustiveSearch(a));
 
+        System.out.println("\n======================PROG19_02=====================");
+        System.out.println("Testing Random Sampling & possible Heuristic solution to TSP");
+        System.out.println("======================================================");
+        Graph TSPHeuristic = new Graph();
+        for(int i = 0; i<10; i++){
+            int[] TSPHeu = new int[6];
+            TSPHeuristic.randomPermutation(TSPHeu);
+            System.out.println(Arrays.toString(TSPHeu));
+        }
 
-        dft.TSP_exhaustiveSearch(a);
+        System.out.println("======================");
+        System.out.println("=======PROG19_03=======");
+        System.out.println("======================");
+        int[] shortestRoute = new int[20];
+        TSP.TSP_randomSampling(shortestRoute);
+        System.out.print("Shortest Path -> ");
+        for(int path: shortestRoute){
+            System.out.print(path);
+        }
+
     }
 }
