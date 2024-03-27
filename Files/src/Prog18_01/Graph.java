@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class Graph implements GraphInterface
 {
     Random ran = new Random();
-    private int verticesNumber;
+    public int verticesNumber;
     private int[][] matrix; //adjacency matrix
     
     public Graph()
@@ -64,7 +64,21 @@ public class Graph implements GraphInterface
 
         in.close();
     }
-    
+        public void createCompleteGraph() {
+            if (matrix == null || verticesNumber <= 0) {
+                System.out.println("Graph not properly initialized. Cannot create complete graph.");
+                return;
+            }
+
+            for (int i = 0; i < verticesNumber; i++) {
+                for (int j = 0; j < verticesNumber; j++) {
+                    if (i != j) {
+                        addEdge(i, j);
+                    }
+                }
+            }
+        }
+
     public void addEdge(int v, int w)
     {
         matrix[v][w] = 1;
@@ -321,6 +335,34 @@ public class Graph implements GraphInterface
         }
         }
     }
+
+    //Prog 19_05
+    public int TSP_localSearch(int[] shortestRoute){
+        int bestDistance;
+
+        int[] a = new int[verticesNumber];
+        randomPermutation(a);
+
+        System.arraycopy(a,0,shortestRoute,0,verticesNumber);
+        bestDistance = totalDistance(shortestRoute);
+
+        boolean betterSolutionFound;
+
+        do {
+            betterSolutionFound = false;
+            Prog19_04PermutationNeighborhood pn = new Prog19_04PermutationNeighborhood(shortestRoute);
+            while (pn.hasNext()) {
+                a = pn.next();
+                int currentDistance = totalDistance(a);
+                if (currentDistance < bestDistance) {
+                    System.arraycopy(a, 0, shortestRoute, 0, verticesNumber);
+                    bestDistance = currentDistance;
+                    betterSolutionFound = true;
+                }
+            }
+        }while (betterSolutionFound) ;
+        return bestDistance;
+        }
 
     private void printArray(int[] a){
         for(int v: a){
