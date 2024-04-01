@@ -89,8 +89,7 @@ public class tester {
         System.out.println("\n======================");
         System.out.println("Travelling salesman algorithm test");
         System.out.println("======================");
-        Graph TSP = new Graph(10); // used for bottom one aswell
-        TSP.createCompleteGraph();
+        Graph TSP = new Graph("graph.txt"); // used for bottom one aswell
         int[] a = new int[20];
         System.out.println(TSP.TSP_exhaustiveSearch(a));
 
@@ -105,12 +104,13 @@ public class tester {
 
         System.out.println("======================");
         System.out.println("=======PROG19_03=======");
+        System.out.println("====TSP_RANDOM_SAMP====");
         System.out.println("======================");
         int[] shortestRoute = new int[20];
         TSP.TSP_randomSampling(shortestRoute);
         System.out.print("Shortest Path -> ");
         for(int path: shortestRoute){
-            System.out.print(path);
+            System.out.print(path + "->");
         }
 
         System.out.println();
@@ -118,8 +118,11 @@ public class tester {
         System.out.println("\n============================");
         System.out.println("=======PROG19_05 TEST=======");
         System.out.println("============================");
+        Graph prog1905 = new Graph("prog1905.txt");
         int[] shorterRouteLocalNeighbor = new int[20];
-        System.out.println(g.TSP_localSearch(shorterRouteLocalNeighbor));
+        System.out.println(prog1905.TSP_localSearch(shorterRouteLocalNeighbor));
+        System.out.println(Arrays.toString(shorterRouteLocalNeighbor));
+
 
     }
 }

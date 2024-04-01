@@ -342,6 +342,7 @@ public class Graph implements GraphInterface
 
         int[] a = new int[verticesNumber];
         randomPermutation(a);
+        System.out.println(Arrays.toString(a));
 
         System.arraycopy(a,0,shortestRoute,0,verticesNumber);
         bestDistance = totalDistance(shortestRoute);
